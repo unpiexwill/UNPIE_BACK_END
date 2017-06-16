@@ -155,7 +155,7 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
     rate = as.numeric(rate),
     inflation = as.numeric(inflation),
     nper = as.numeric(nperWithdrawals),
-    fv = as.numeric(pmt))
+    fv = as.numeric(fvTemp))
 
   fv=pmtTemp[1]
   
