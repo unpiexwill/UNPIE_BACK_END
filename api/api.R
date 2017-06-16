@@ -98,7 +98,7 @@ function(rate=0,inflation=0,nper=1,pv=0)
     rate = as.numeric(inflation),
     inflation = 0,
     nper = as.numeric(nper),
-    fv = as.numeric(pv/(1+inflation)))
+    pv = as.numeric(pv/(1+inflation)))
   
   fv=unpie::fv.annuity(rate,0,nper,-pmt_infladj)
   
