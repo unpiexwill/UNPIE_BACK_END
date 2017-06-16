@@ -183,7 +183,12 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
     pmtinfladj = as.logical(FALSE), 
     pmtUltimo = as.logical(TRUE))
   
+  print(pvTemp)
+  
   pvTemp = pvTemp[nperWithdrawals]
+  print(nperWithdrawals)
+  
+  print(pvTemp)
   
   pv = unpie::pv.single(
     rate = as.numeric(realRate),
