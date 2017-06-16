@@ -140,7 +140,7 @@ function(rate=0,inflation=0,nper=1,pmt=0)
 function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
 {
   
-  fvTemp = fv(
+  fvTemp = unpie::fv(
     rate = as.numeric(rate),
     inflation = as.numeric(inflation),
     nper = as.numeric(nperSavings),
@@ -151,7 +151,7 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
     
   fvTemp = fvTemp[length(fvTemp)]
   
-  pmtTemp = pmt(
+  pmtTemp = unpie::pmt(
     rate = as.numeric(rate),
     inflation = as.numeric(inflation),
     nper = as.numeric(nperWithdrawals),
@@ -172,7 +172,7 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
     inflation = as.numeric(inflation)
   )
   
-  pvTemp = pv(
+  pvTemp = unpie::pv(
     rate = as.numeric(realRate),
     inflation = as.numeric(0), 
     nper = as.numeric(nperWithdrawals),
@@ -181,14 +181,13 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
     pmtinfladj = as.logical(FALSE), 
     pmtUltimo = as.logical(TRUE))
   
-  pv = pv.single(
+  pv = unpie::pv.single(
     rate = as.numeric(realRate),
     inflation = as.numeric(0),
     nper = as.numeric(nperSavings),
     fv = as.numeric(-pvTemp[nper_withdrawals]))
   
-  
-  pmt = pmt(
+  pmt = unpie::pmt(
     rate = as.numeric(rate), 
     inflation = as.numeric(inflation), 
     nper = as.numeric(nper_savings), 
