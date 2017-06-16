@@ -103,7 +103,11 @@ function(rate=0,inflation=0,nper=1,pv=0)
     nper = as.numeric(nper),
     pv = as.numeric(pv_new))
   
-  fv=unpie::fv.annuity(as.numeric(rate),as.numeric(0),as.numeric(nper),as.ts(-pmt_infladj))
+  fv=unpie::fv.annuity(
+    rate = as.numeric(rate),
+    inflation = as.numeric(0),
+    nper = as.numeric(nper),
+    pmt = as.ts(-pmt_infladj))
   
   return(fv)
   
@@ -112,12 +116,22 @@ function(rate=0,inflation=0,nper=1,pv=0)
 #* @get /wrapper.case7
 function(rate=0,inflation=0,nper=1,pmt=0)
 {
-  unpie:::wrapper.case7(
+  
+  realRate = unpie::rate.real(
     rate = as.numeric(rate),
-    inflation = as.numeric(inflation),
-    nper = as.numeric(nper),
-    pmt = as.numeric(pmt)
+    inflation = as.numeric(inflation)
   )
+  
+  
+  pv = unpie::pv.annuity(
+    rate = as.numeric(realRate),
+    inflation = as.numeric(0),
+    nper = as.numeric(nper),
+    pmt = as.numeric(pmt),
+    pmtinfladj = as.logical(FALSE),
+    pmtUltimo = as.logical(FALSE))
+  
+  return(pv)
   
 }
 
@@ -125,25 +139,60 @@ function(rate=0,inflation=0,nper=1,pmt=0)
 #* @get /wrapper.case8
 function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
 {
-  unpie::wrapper.case8(
+  
+  fvTemp = fv(
     rate = as.numeric(rate),
     inflation = as.numeric(inflation),
-    nper_savings = as.numeric(nperSavings),
-    nper_withdrawal = as.numeric(nperWithdrawals),
-    pmt = as.numeric(pmt)
-  )
+    nper = as.numeric(nperSavings),
+    pv = as.numeric(0),
+    pmt = as.numeric(pmt),
+    pmtinfladj = as.logical(TRUE),
+    pmtUltimo = as.logical(FALSE))
+    
+  fvTemp = fvTemp[length(fvTemp)]
+  
+  pmtTemp = pmt(
+    rate = as.numeric(rate),
+    inflation = as.numeric(inflation),
+    nper = as.numeric(nperWithdrawals),
+    fv = as.numeric(pmt))
+
+  fv=pmtTemp[1]
+  
+  return(fv)
   
 }
 
 #* @get /wrapper.case9
 function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
 {
-  unpie:::wrapper.case9(
+  
+  realRate = unpie::rate.real(
     rate = as.numeric(rate),
-    inflation = as.numeric(inflation),
-    nper_savings = as.numeric(nperSavings),
-    nper_withdrawal = as.numeric(nperWithdrawals),
-    pmt = as.numeric(pmt)
+    inflation = as.numeric(inflation)
   )
   
+  pvTemp = pv(
+    rate = as.numeric(realRate),
+    inflation = as.numeric(0), 
+    nper = as.numeric(nperWithdrawals),
+    fv = as.numeric(0),
+    pmt = as.numeric(pmt),
+    pmtinfladj = as.logical(FALSE), 
+    pmtUltimo = as.logical(TRUE))
+  
+  pv = pv.single(
+    rate = as.numeric(realRate),
+    inflation = as.numeric(0),
+    nper = as.numeric(nperSavings),
+    fv = as.numeric(-pvTemp[nper_withdrawals]))
+  
+  
+  pmt = pmt(
+    rate = as.numeric(rate), 
+    inflation = as.numeric(inflation), 
+    nper = as.numeric(nper_savings), 
+    fv = as.numeric(pv[nper_savings]))[1]
+  
+  return(pmt)
 }
