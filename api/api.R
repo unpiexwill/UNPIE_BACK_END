@@ -95,7 +95,7 @@ function(rate = 0, inflation = 0, nper = 1, fv = 0){
 function(rate=0,inflation=0,nper=1,pv=0)
 {
   
-  pv_new = as.numeric(pv)/(1+as.numeric(pv))
+  pv_new = as.numeric(pv)/(1+as.numeric(inflation))
   
   pmt_infladj=unpie::fv.single(
     rate = as.numeric(inflation),
