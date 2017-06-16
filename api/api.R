@@ -94,11 +94,13 @@ function(rate = 0, inflation = 0, nper = 1, fv = 0){
 #* @get /wrapper.case5
 function(rate=0,inflation=0,nper=1,pv=0)
 {
+  pv = as.numeric(pv)/(as.numeric(1)+as.numeric(inflation))
+  
   pmt_infladj=unpie::fv.single(
     rate = as.numeric(inflation),
     inflation = 0,
     nper = as.numeric(nper),
-    pv = as.numeric(pv/as.numeric(1+inflation)))
+    pv = as.numeric(pv))
   
   fv=unpie::fv.annuity(rate,0,nper,-pmt_infladj)
   
