@@ -95,12 +95,13 @@ function(rate = 0, inflation = 0, nper = 1, fv = 0){
 function(rate=0,inflation=0,nper=1,pv=0)
 {
   
+  pv_new = as.numeric(pv)/(1+as.numeric(pv))
   
   pmt_infladj=unpie::fv.single(
     rate = as.numeric(inflation),
     inflation = as.numeric(0),
     nper = as.numeric(nper),
-    pv = as.numeric(pv))
+    pv = as.numeric(pv_new))
   
   fv=unpie::fv.annuity(as.numeric(rate),as.numeric(0),as.numeric(nper),as.ts(-pmt_infladj))
   
