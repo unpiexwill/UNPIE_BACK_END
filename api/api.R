@@ -102,7 +102,7 @@ function(rate=0,inflation=0,nper=1,pv=0)
     nper = as.numeric(nper),
     pv = as.numeric(pv))
   
-  fv=unpie::fv.annuity(as.numeric(rate),as.numeric(0),as.numeric(nper),as.numeric(-pmt_infladj))
+  fv=unpie::fv.annuity(as.numeric(rate),as.numeric(0),as.numeric(nper),as.ts(-pmt_infladj))
   
   return(fv)
   
