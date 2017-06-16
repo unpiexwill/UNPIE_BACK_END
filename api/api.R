@@ -147,7 +147,7 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
     pv = as.numeric(0),
     pmt = as.numeric(pmt),
     pmtinfladj = as.logical(TRUE),
-    pmtUltimo = as.logical(FALSE))
+    pmtUltimo = as.logical(TRUE))
     
   fvTemp = fvTemp[length(fvTemp)]
   
