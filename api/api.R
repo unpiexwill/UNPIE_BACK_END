@@ -185,24 +185,23 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
   
   print(pvTemp)
   
-  pvTemp = pvTemp[nperWithdrawals]
+  pvTemp = pvTemp[as.numeric(nperWithdrawals)]
   print(nperWithdrawals)
-  
   print(pvTemp)
-  
+
   pv = unpie::pv.single(
     rate = as.numeric(realRate),
     inflation = as.numeric(0),
     nper = as.numeric(nperSavings),
     fv = as.numeric(-pvTemp))
   
-  print(pv)
+  pv = pv[as.numeric(nperSavings)]
   
   pmt = unpie::pmt(
     rate = as.numeric(rate), 
     inflation = as.numeric(inflation), 
     nper = as.numeric(nperSavings), 
-    fv = as.numeric(pv[nperSavings]))[1]
+    fv = as.numeric(pv))[1]
   
   return(pmt)
 }
