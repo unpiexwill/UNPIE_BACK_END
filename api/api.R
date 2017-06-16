@@ -118,7 +118,7 @@ function(rate=0,inflation=0,nper=1,pmt=0)
 {
   
   realRate = unpie::rate.real(
-    rate = as.numeric(rate),
+    nominalRate = as.numeric(rate),
     inflation = as.numeric(inflation)
   )
   
@@ -168,7 +168,7 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
 {
   
   realRate = unpie::rate.real(
-    rate = as.numeric(rate),
+    nominalRate = as.numeric(rate),
     inflation = as.numeric(inflation)
   )
   
