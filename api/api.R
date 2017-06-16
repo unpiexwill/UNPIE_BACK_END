@@ -181,7 +181,7 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
     fv = as.numeric(0),
     pmt = as.numeric(pmt),
     pmtinfladj = as.logical(FALSE), 
-    pmtUltimo = as.logical(TRUE))
+    pmtUltimo = as.logical(TRUE))[nperWithdrawals]
   
   print(pvTemp)
   
@@ -189,7 +189,7 @@ function(rate=0,inflation=0,nperSavings=1,nperWithdrawals=0,pmt=0)
     rate = as.numeric(realRate),
     inflation = as.numeric(0),
     nper = as.numeric(nperSavings),
-    fv = as.numeric(-pvTemp[nperWithdrawals]))
+    fv = as.numeric(-pvTemp))
   
   print(pv)
   
