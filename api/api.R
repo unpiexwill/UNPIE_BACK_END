@@ -94,7 +94,7 @@ function(rate = 0, inflation = 0, nper = 1, fv = 0){
 #* @get /wrapper.case5
 function(rate=0,inflation=0,nper=1,pv=0)
 {
-  pv = as.numeric(pv)/(as.numeric(1)+as.numeric(inflation))
+  
   
   pmt_infladj=unpie::fv.single(
     rate = as.numeric(inflation),
